@@ -3,12 +3,14 @@ const mongoose = require('mongoose');
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
+    unique: true,
     required: true,
     minlength: 8,
     maxlength: 40,
   },
   login: {
     type: String,
+    unique: true,
     required: true,
     minlength: 5,
     maxlength: 12,
@@ -19,8 +21,9 @@ const userSchema = new mongoose.Schema({
     enum: ['Инженер', 'Ведущий инженер','Главный инженер']
   },
   center: {
-    type: String,
-    enum: ['Научный', 'Солнцево', 'Нагатинская', 'Братиславская',]
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'center',
+    required: true,
   },
   password: {
     type: String,
